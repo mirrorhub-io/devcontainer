@@ -1,4 +1,5 @@
 # Mirrorhub development container
+[![Docker Repository on Quay](https://quay.io/repository/mirrorhub/devcontainer/status "Docker Repository on Quay")](https://quay.io/repository/mirrorhub/devcontainer)
 
 This container will allows you to easily start developing at mirrorhub project.
 
