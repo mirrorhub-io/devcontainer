@@ -15,6 +15,7 @@ Alternativly spawn them *persistent*.
 ```bash
 docker-compose up -d
 ssh root@localhost -p 64000 # pass: test123
+vcsh clone ...https://your-dotfiles...
 ```
 
 Using protoc with mirrorhub-io/platform.
