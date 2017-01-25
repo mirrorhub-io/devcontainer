@@ -10,6 +10,12 @@ Thats it!
 docker volume create --name devcontainer
 docker run -ti quay.io/mirrorhub/devcontainer bash
 ```
+Alternativly spawn them *persistent*.
+
+```bash
+docker-compose up -d
+ssh root@localhost -p 64000 # pass: test123
+```
 
 Using protoc with mirrorhub-io/platform.
 
