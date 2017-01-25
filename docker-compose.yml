@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+  devcontainer:
+    hostname: devcontainer
+    restart: always
+    image: quay.io/mirrorhub/devcontainer
+    privileged: true
+    links:
+      - redis:redis
+    ports:
+      - "64000:22"
+    volumes:
+      - ~/.docker_data/root:/root
+      
+  redis:
+    restart: always
+    image: redis
