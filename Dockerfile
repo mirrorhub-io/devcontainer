@@ -41,5 +41,7 @@ RUN mkdir -p /root/.vim/autoload
 RUN cd /root/.vim/autoload && wget https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim
 RUN cd /root/.vim/bundle && git clone https://github.com/fatih/vim-go
 
+CMD /usr/sbin/sshd -D
+
 
 
