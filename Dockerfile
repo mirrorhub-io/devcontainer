@@ -12,7 +12,13 @@ RUN go get -v github.com/jinzhu/gorm/dialects/sqlite
 
 RUN apt update 
 RUN apt install -y \
-  openssh-server vim unzip wget curl git
+  openssh-server unzip \
+  vim powerline \
+  dnsutils iputils-ping iptables \
+  mtr-tiny fping sysstat iptraf iftop nload tcpdump \
+  wget curl jq libcurl4-openssl-dev \
+  locales util-linux-locales\
+  git
 
 RUN mkdir -p /tmp
 RUN mkdir -p /usr/local/include
@@ -20,6 +26,11 @@ RUN cd /tmp && wget https://github.com/google/protobuf/releases/download/v3.2.0r
 
 RUN echo "export GOPATH=/go" >> /etc/profile
 RUN echo "export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH" >> /etc/profile
+
+RUN mkdir /var/run/sshd 
+RUN echo 'root:test123' | chpasswd 
+RUN sed -i 's/PermitRootLogin .*-password/PermitRootLogin yes/' /etc/ssh/sshd_config 
+RUN sed -i 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' /etc/pam.d/sshd
 
 WORKDIR /root
 
@@ -29,4 +40,6 @@ RUN mkdir -p /root/.vim/bundle
 RUN mkdir -p /root/.vim/autoload
 RUN cd /root/.vim/autoload && wget https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim
 RUN cd /root/.vim/bundle && git clone https://github.com/fatih/vim-go
+
+
 
