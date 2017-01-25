@@ -17,8 +17,8 @@ RUN apt install -y \
   dnsutils iputils-ping iptables \
   mtr-tiny fping sysstat iptraf iftop nload tcpdump \
   wget curl jq libcurl4-openssl-dev \
-  locales util-linux-locales\
-  git
+  locales util-linux-locales \
+  git vcsh
 
 RUN mkdir -p /tmp
 RUN mkdir -p /usr/local/include
@@ -26,6 +26,9 @@ RUN cd /tmp && wget https://github.com/google/protobuf/releases/download/v3.2.0r
 
 RUN echo "export GOPATH=/go" >> /etc/profile
 RUN echo "export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH" >> /etc/profile
+
+RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+RUN locale-gen en_US.UTF-8
 
 RUN mkdir /var/run/sshd 
 RUN echo 'root:test123' | chpasswd 
