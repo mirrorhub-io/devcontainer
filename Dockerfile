@@ -35,6 +35,8 @@ RUN echo 'root:test123' | chpasswd
 RUN sed -i 's/PermitRootLogin .*-password/PermitRootLogin yes/' /etc/ssh/sshd_config 
 RUN sed -i 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' /etc/pam.d/sshd
 
+RUN echo -n > /etc/motd
+
 WORKDIR /root
 
 COPY .bashrc /root
