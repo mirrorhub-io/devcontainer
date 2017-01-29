@@ -1,18 +1,28 @@
 version: '2'
 
+networks:
+  mirrorhub:
+
 services:
+  platform:
+    hostname: platform
+    restart: always
+    image: quay.io/mirrorhub/platform
+    networks: [mirrorhub]
+
   devcontainer:
     hostname: devcontainer
     restart: always
     image: quay.io/mirrorhub/devcontainer
     privileged: true
-    links:
-      - redis:redis
+    networks: [mirrorhub]
     ports:
       - "64000:22"
     volumes:
       - ~/.docker_data/root:/root
       
   redis:
+    hostname: redis
     restart: always
     image: redis
+    networks: [mirrorhub]
