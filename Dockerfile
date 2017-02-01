@@ -9,6 +9,9 @@ RUN go get -v cloud.google.com/go/vision || true
 RUN go get -v google.golang.org/grpc
 RUN go get -v github.com/jinzhu/gorm
 RUN go get -v github.com/jinzhu/gorm/dialects/sqlite
+RUN go get -v github.com/satori/go.uuid
+RUN go get -v gopkg.in/redis.v5
+RUN go get -v golang.org/x/crypto/bcrypt
 
 RUN apt update 
 RUN apt install -y \
