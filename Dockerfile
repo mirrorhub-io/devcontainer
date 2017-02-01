@@ -12,6 +12,7 @@ RUN go get -v github.com/jinzhu/gorm/dialects/sqlite
 RUN go get -v github.com/satori/go.uuid
 RUN go get -v gopkg.in/redis.v5
 RUN go get -v golang.org/x/crypto/bcrypt
+RUN go get -v github.com/spf13/cobra/cobra
 
 RUN apt update 
 RUN apt install -y \
