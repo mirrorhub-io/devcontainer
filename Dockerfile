@@ -1,4 +1,20 @@
-FROM golang
+FROM debian:sid
+
+RUN apt update 
+RUN apt install -y \
+  openssh-server unzip \
+  golang-go \
+  vim powerline \
+  dnsutils iputils-ping iptables \
+  mtr-tiny fping sysstat iptraf iftop nload tcpdump \
+  wget curl jq libcurl4-openssl-dev \
+  locales util-linux-locales \
+  git vcsh
+
+RUN echo "export GOPATH=/go" >> /etc/profile
+RUN echo "export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH" >> /etc/profile
+
+ENV GOPATH=/go
 
 RUN go get -v github.com/gengo/grpc-gateway/third_party/googleapis/google/api
 RUN go get -v github.com/golang/protobuf/protoc-gen-go
@@ -14,22 +30,9 @@ RUN go get -v gopkg.in/redis.v5
 RUN go get -v golang.org/x/crypto/bcrypt
 RUN go get -v github.com/spf13/cobra/cobra
 
-RUN apt update 
-RUN apt install -y \
-  openssh-server unzip \
-  vim powerline \
-  dnsutils iputils-ping iptables \
-  mtr-tiny fping sysstat iptraf iftop nload tcpdump \
-  wget curl jq libcurl4-openssl-dev \
-  locales util-linux-locales \
-  git vcsh
-
 RUN mkdir -p /tmp
 RUN mkdir -p /usr/local/include
-RUN cd /tmp && wget https://github.com/google/protobuf/releases/download/v3.2.0rc2/protoc-3.2.0rc2-linux-x86_64.zip && unzip *.zip && mv -v bin/* /bin && mv -v include/* /usr/local/include/ && chmod +x /bin/protoc
-
-RUN echo "export GOPATH=/go" >> /etc/profile
-RUN echo "export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH" >> /etc/profile
+RUN cd /tmp && wget https://github.com/google/protobuf/releases/download/v3.2.0/protoc-3.2.0-linux-x86_64.zip && unzip *.zip && mv -v bin/* /bin && mv -v include/* /usr/local/include/ && chmod +x /bin/protoc
 
 RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 RUN locale-gen en_US.UTF-8
