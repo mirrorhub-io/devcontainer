@@ -29,7 +29,8 @@ RUN go get -v github.com/satori/go.uuid
 RUN go get -v gopkg.in/redis.v5
 RUN go get -v golang.org/x/crypto/bcrypt
 RUN go get -v github.com/spf13/cobra/cobra
-RUN go get github.com/hokaccha/go-prettyjson
+RUN go get -v github.com/hokaccha/go-prettyjson
+RUN go get -v github.com/hashicorp/golang-lru
 
 RUN mkdir -p /tmp
 RUN mkdir -p /usr/local/include
